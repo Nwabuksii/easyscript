@@ -9,7 +9,7 @@ import pkg from './package.json';
 
 const VERSION = pkg.version;
 // Change this to your real repo URL before you publish.
-const REPO_URL = 'https://github.com/yourname/easyscript';
+const REPO_URL = 'https://github.com/Nwabuksii/easyscript';
 
 const HELP = `
 easyScript (esx) v${VERSION}

@@ -2,3 +2,4 @@ bring { add } from './utils';
 
 fixed result = add(2, 3);
 console.log(result is 5 ? "correct" : "wrong");
+if(2>3)
