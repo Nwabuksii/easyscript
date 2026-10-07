@@ -1,0 +1,3 @@
+give block add(a, b) {
+  send a + b;
+}

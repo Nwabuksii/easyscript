@@ -1,0 +1,25 @@
+contract User {
+  name: string;
+  age: number;
+}
+
+bprint Greeter follows User {
+  name: string;
+  age: number;
+  setup(name: string, age: number) {
+    self.name = name;
+    self.age = age;
+  }
+  hello(): string {
+    send `Hello, ${self.name}${self.age >= 18 and self.age < 65 ? "" : " (special)"}`;
+  }
+}
+
+pending block main(): Promise<void> {
+  fixed g: Greeter = new Greeter("Ada", 36);
+  console.log(g.hello());
+  fixed r = waitfor Promise.resolve(42);
+  console.log(r is 42 ? "answer" : "hmm");
+}
+
+main();

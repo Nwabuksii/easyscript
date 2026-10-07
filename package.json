@@ -1,0 +1,21 @@
+{
+  "name": "easyscript",
+  "version": "0.1.0",
+  "type": "module",
+  "bin": {
+    "esx": "esx.js"
+  },
+  "main": "esx.js",
+  "engines": {
+    "node": ">=22.15"
+  },
+  "pkg": {
+    "scripts": ["compiler.js"],
+    "targets": ["node22-win-x64"],
+    "outputPath": "dist"
+  },
+  "devDependencies": {
+    "png-to-ico": "^3.0.2",
+    "sharp": "^0.35.5"
+  }
+}

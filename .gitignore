@@ -1,0 +1,20 @@
+# Build output
+dist/
+installer-output/
+*.vsix
+
+# Assets you regenerate
+assets/*.ico
+vscode-easyscript/icons/icon.png
+
+# Node/Bun
+node_modules/
+bun.lockb
+package-lock.json
+
+# Inno Setup download
+path.iss
+
+# OS
+.DS_Store
+Thumbs.db

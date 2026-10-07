@@ -1,0 +1,26 @@
+fixed names = ["Ada", "Linus", "Grace"];
+make total = 0;
+
+block greet(name, age) {
+  when (age >= 18 and name isnot "") {
+    send "Hello, " + name;
+  } othen (age > 0) {
+    send "Hi, " + name;
+  } ifnot {
+    send "Who are you?";
+  }
+}
+
+runtill (make i = 0; i < names.length; i++) {
+  when (names[i] is "Linus") skip;
+  total += 1;
+  console.log(greet(names[i], 20));
+}
+
+match (total) {
+  option 2:
+    console.log("two");
+    stop;
+  other:
+    console.log("other");
+}
