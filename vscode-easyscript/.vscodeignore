@@ -1,0 +1,25 @@
+# Sources — only compiled output should ship
+src/**
+server/**
+**/*.ts
+!**/*.d.ts
+
+# Build artifacts
+out/server/*.map
+out/src/*.map
+
+# Dev files
+tsconfig.json
+.eslintrc*
+.gitignore
+node_modules/**
+
+# Keep these (do NOT ignore):
+# out/
+# icons/
+# fileicons/
+# syntaxes/
+# language-configuration.*.json
+# package.json
+# README.md
+# LICENSE
