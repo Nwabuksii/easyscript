@@ -5,7 +5,6 @@ installer-output/
 
 # Assets you regenerate
 assets/*.ico
-vscode-easyscript/icons/icon.png
 
 # Node/Bun
 node_modules/
@@ -14,6 +13,11 @@ package-lock.json
 
 # Inno Setup download
 path.iss
+
+# VS Code extension build output
+vscode-easyscript/node_modules/
+vscode-easyscript/out/
+vscode-easyscript/*.vsix
 
 # OS
 .DS_Store

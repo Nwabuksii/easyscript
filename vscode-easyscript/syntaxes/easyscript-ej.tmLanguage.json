@@ -3,144 +3,73 @@
   "name": "easyScript",
   "scopeName": "source.easyscript",
   "patterns": [
-    { "include": "#comments" },
-    { "include": "#strings" },
-    { "include": "#template-strings" },
-    { "include": "#regex" },
-    { "include": "#numbers" },
+    { "include": "#print-out" },
+    { "include": "#function-declaration" },
+    { "include": "#class-declaration" },
     { "include": "#keywords" },
-    { "include": "#operators" },
-    { "include": "#constants" },
-    { "include": "#functions" }
+    { "include": "#operator-keywords" },
+    { "include": "source.js" }
   ],
   "repository": {
-    "comments": {
+    "print-out": {
+      "match": "\\b(print)\\s*(\\.)\\s*(out)\\b",
+      "captures": {
+        "1": { "name": "support.class.easyscript" },
+        "2": { "name": "punctuation.accessor.easyscript" },
+        "3": { "name": "entity.name.function.easyscript" }
+      }
+    },
+    "function-declaration": {
+      "begin": "\\b(block|setup)\\s*([A-Za-z_$][\\w$]*)?\\s*(\\()",
+      "beginCaptures": {
+        "1": { "name": "storage.type.function.easyscript" },
+        "2": { "name": "entity.name.function.easyscript" },
+        "3": { "name": "punctuation.definition.parameters.begin.easyscript" }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.parameters.end.easyscript" }
+      },
+      "patterns": [{ "include": "#parameter-list" }]
+    },
+    "parameter-list": {
       "patterns": [
         {
-          "name": "comment.line.double-slash.easyscript",
-          "match": "//.*$"
+          "match": "\\b([A-Za-z_$][\\w$]*)\\b\\s*(\\?)?\\s*(:)\\s*([A-Za-z_$][\\w$.<>\\[\\]|]*)",
+          "captures": {
+            "1": { "name": "variable.parameter.easyscript" },
+            "2": { "name": "keyword.operator.optional.easyscript" },
+            "3": { "name": "punctuation.separator.type.easyscript" },
+            "4": { "name": "support.type.easyscript" }
+          }
         },
         {
-          "name": "comment.block.easyscript",
-          "begin": "/\\*",
-          "end": "\\*/"
+          "match": "\\b([A-Za-z_$][\\w$]*)\\b",
+          "captures": {
+            "1": { "name": "variable.parameter.easyscript" }
+          }
         }
       ]
     },
-    "strings": {
-      "patterns": [
-        {
-          "name": "string.quoted.double.easyscript",
-          "begin": "\"",
-          "end": "\"",
-          "patterns": [
-            { "name": "constant.character.escape.easyscript", "match": "\\\\." }
-          ]
-        },
-        {
-          "name": "string.quoted.single.easyscript",
-          "begin": "'",
-          "end": "'",
-          "patterns": [
-            { "name": "constant.character.escape.easyscript", "match": "\\\\." }
-          ]
-        }
-      ]
-    },
-    "template-strings": {
-      "patterns": [
-        {
-          "name": "string.template.easyscript",
-          "begin": "`",
-          "end": "`",
-          "patterns": [
-            { "include": "#template-expression" },
-            { "name": "constant.character.escape.easyscript", "match": "\\\\." }
-          ]
-        }
-      ]
-    },
-    "template-expression": {
-      "begin": "\\$\\{",
-      "end": "\\}",
-      "patterns": [
-        { "include": "#comments" },
-        { "include": "#strings" },
-        { "include": "#numbers" },
-        { "include": "#keywords" },
-        { "include": "#operators" },
-        { "include": "#constants" }
-      ]
-    },
-    "regex": {
-      "patterns": [
-        {
-          "name": "string.regexp.easyscript",
-          "begin": "(?<![\\w$)\\]])/(?![/*])",
-          "end": "/[gimsuy]*",
-          "patterns": [
-            { "name": "constant.character.escape.easyscript", "match": "\\\\." }
-          ]
-        }
-      ]
-    },
-    "numbers": {
-      "patterns": [
-        {
-          "name": "constant.numeric.easyscript",
-          "match": "\\b(0[xX][0-9a-fA-F_]+|0[bB][01_]+|0[oO][0-7_]+|(\\d[\\d_]*\\.?[\\d_]*|\\.\\d[\\d_]*)([eE][+-]?\\d+)?)\\b"
-        }
-      ]
+    "class-declaration": {
+      "match": "\\b(bprint|contract)\\s+([A-Za-z_$][\\w$]*)",
+      "captures": {
+        "1": { "name": "storage.type.class.easyscript" },
+        "2": { "name": "entity.name.type.class.easyscript" }
+      }
     },
     "keywords": {
       "patterns": [
-        {
-          "name": "storage.type.easyscript",
-          "match": "\\b(fixed|make|mutable)\\b"
-        },
-        {
-          "name": "keyword.control.easyscript",
-          "match": "\\b(when|othen|ifnot|match|option|other|runtill|keeprun|exec|stop|skip|send|bring|give|pending|waitfor)\\b"
-        },
-        {
-          "name": "storage.type.function.easyscript",
-          "match": "\\b(block|bprint|contract)\\b"
-        },
-        {
-          "name": "storage.modifier.easyscript",
-          "match": "\\b(inherits|follows|setup|self)\\b"
-        },
-        {
-          "name": "keyword.operator.word.easyscript",
-          "match": "\\b(is|isnot|and|or)\\b"
-        }
+        { "name": "storage.type.easyscript", "match": "\\b(fixed|make|mutable)\\b" },
+        { "name": "keyword.control.easyscript", "match": "\\b(when|othen|ifnot|match|option|other|runtill|keeprun|exec|stop|skip|send|bring|give|pending|waitfor)\\b" },
+        { "name": "storage.type.function.easyscript", "match": "\\b(block|bprint|contract|inherits|follows|setup|self)\\b" }
       ]
     },
-    "operators": {
+    "operator-keywords": {
       "patterns": [
         {
-          "name": "keyword.operator.easyscript",
-          "match": "(===|!==|=>|\\+\\+|--|\\+=|-=|\\*=|/=|&&|\\|\\||[+\\-*/%=<>!&|^~?])"
-        }
-      ]
-    },
-    "constants": {
-      "patterns": [
-        {
-          "name": "constant.language.easyscript",
-          "match": "\\b(true|false|null|undefined|NaN|Infinity)\\b"
-        },
-        {
-          "name": "variable.language.easyscript",
-          "match": "\\b(self|this|super)\\b"
-        }
-      ]
-    },
-    "functions": {
-      "patterns": [
-        {
-          "name": "entity.name.function.easyscript",
-          "match": "\\b([a-zA-Z_$][\\w$]*)\\s*(?=\\()"
+          "match": "\\b(is|isnot|and|or)\\b",
+          "name": "keyword.operator.word.easyscript"
         }
       ]
     }

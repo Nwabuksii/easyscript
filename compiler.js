@@ -1,5 +1,30 @@
 // easyScript compiler: .ej/.et source -> JS/TS source.
 // Tokenizes first, so strings, comments, regex and template text are never rewritten.
+
+// Rewrite `print . out` (any whitespace between) to a single `console.log` token.
+function rewritePrintOut(toks) {
+  const out = [];
+  let i = 0;
+  while (i < toks.length) {
+    const t = toks[i];
+    if (t.type === 'id' && t.text === 'print') {
+      let j = i + 1;
+      while (j < toks.length && (toks[j].type === 'ws' || toks[j].type === 'cmt')) j++;
+      if (toks[j]?.type === 'p' && toks[j].text === '.') {
+        j++;
+        while (j < toks.length && (toks[j].type === 'ws' || toks[j].type === 'cmt')) j++;
+        if (toks[j]?.type === 'id' && toks[j].text === 'out') {
+          out.push({ type: 'id', text: 'console.log', pos: t.pos });
+          i = j + 1;
+          continue;
+        }
+      }
+    }
+    out.push(t);
+    i++;
+  }
+  return out;
+}
 export class EasyError extends Error {}
 
 export const MAP = Object.assign(Object.create(null), {
@@ -61,12 +86,13 @@ function lex(src) {
 }
 
 export function compile(src, file = 'input') {
+  if (src.charCodeAt(0) === 0xfeff) src = src.slice(1);   // strip UTF-8 BOM
   const lines = src.split('\n');
   const fail = (pos, msg) => {
     const before = src.slice(0, pos).split('\n'), line = before.length, col = before.at(-1).length + 1;
     throw new EasyError(`[Easy Compile Error] ${file}:${line}:${col}\n  ${msg}\n  ${line} | ${lines[line - 1]}`);
   };
-  const toks = lex(src);
+  const toks = rewritePrintOut(lex(src));
   const sig = toks.filter((t) => t.type !== 'ws' && t.type !== 'cmt');
   // newline between a significant token and the one before it => statement start
   const nlBefore = new Map();
