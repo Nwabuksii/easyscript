@@ -1,0 +1,18 @@
+{
+  "iconDefinitions": {
+    "_ej_file": {
+      "iconPath": "../icons/ej.png"
+    },
+    "_et_file": {
+      "iconPath": "../icons/et.png"
+    }
+  },
+  "fileExtensions": {
+    "ej": "_ej_file",
+    "et": "_et_file"
+  },
+  "languageIds": {
+    "easyscript": "_ej_file",
+    "easytypescript": "_et_file"
+  }
+}

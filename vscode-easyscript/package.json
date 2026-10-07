@@ -1,0 +1,47 @@
+{
+  "name": "easyscript",
+  "displayName": "easyScript",
+  "description": "Syntax highlighting and file icons for easyScript (.ej) and easyTypeScript (.et)",
+  "version": "0.1.0",
+  "publisher": "Nwabuks",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "icon": "icons/icon.png",
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [
+      {
+        "id": "easyscript",
+        "aliases": ["easyScript", "ej"],
+        "extensions": [".ej"],
+        "configuration": "./language-configuration.ej.json"
+      },
+      {
+        "id": "easytypescript",
+        "aliases": ["easyTypeScript", "et"],
+        "extensions": [".et"],
+        "configuration": "./language-configuration.et.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "easyscript",
+        "scopeName": "source.easyscript",
+        "path": "./syntaxes/easyscript-ej.tmLanguage.json"
+      },
+      {
+        "language": "easytypescript",
+        "scopeName": "source.easytypescript",
+        "path": "./syntaxes/easyscript-et.tmLanguage.json"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "easyscript-icons",
+        "label": "easyScript Icons",
+        "path": "./fileicons/easyscript-icon-theme.json"
+      }
+    ]
+  }
+}
