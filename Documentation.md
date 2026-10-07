@@ -24,16 +24,6 @@ so the two can coexist in the same project without stepping on each other.
 
 ---
 
-## Keywords changed from the first draft
-
-| Standard JS / TS | Old easyScript | New easyScript | Why |
-| --- | --- | --- | --- |
-| `const` | `set` | **`fixed`** | `set` clashes with class setters (`set value(v) {}`) |
-| `return` | `yield` | **`send`** | Frees the real `yield` for generators |
-| `yield` | (was `return`) | *unchanged* | Generators work as in JS |
-| `default` | (unmapped) | **`other`** | Matches the renamed `case` / `match` |
-
----
 
 ## Full keyword reference
 
